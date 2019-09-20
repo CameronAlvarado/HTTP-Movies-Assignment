@@ -39,6 +39,17 @@ const UpdateForm = (props) => {
           .catch(err => console.log(err.response));
       };
 
+    const deleteMovie = e => {
+        e.preventDefault();
+    axios
+        .delete(`http://localhost:5000/api/movies/${movie.id}`)
+        .then(res => {
+            console.log(res);
+            props.history.push(`/`);
+        })
+        .catch(err => console.log(err.response))
+        }
+
     const changeHandler = ev => {
         ev.persist();
         let value = ev.target.value;
@@ -93,6 +104,7 @@ const UpdateForm = (props) => {
                 <div className="baseline" />
 
                 <button className="md-button form-button">Update</button>
+                <button onClick={deleteMovie}>Delete</button>
             </form>
         </div>
     )
