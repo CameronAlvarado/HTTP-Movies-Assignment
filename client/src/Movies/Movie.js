@@ -1,6 +1,9 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import axios from "axios";
 import MovieCard from "./MovieCard";
+import UpdateForm from '../UpdateForm';
+
 export default class Movie extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +34,11 @@ export default class Movie extends React.Component {
     addToSavedList(this.state.movie);
   };
 
+  routeToForm = event => {
+    event.preventDefault();
+    this.props.history.push(`update-movie/${this.state.movie.id}`);
+  };
+
   render() {
     if (!this.state.movie) {
       return <div>Loading movie information...</div>;
@@ -41,6 +49,9 @@ export default class Movie extends React.Component {
         <MovieCard movie={this.state.movie} />
         <div className="save-button" onClick={this.saveMovie}>
           Save
+        </div>
+        <div className="new-route-button" onClick={this.routeToForm}>
+          Edit
         </div>
       </div>
     );
